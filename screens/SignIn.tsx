@@ -7,11 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 const SignIn =() => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("") 
-  const [user,setUser] = useState(null)
   
-  // useEffect(()=>{
-  //      setUser(auth().currentUser)
-  // },[user]) 
   const navigation = useNavigation();
   
   const handleSignIn = async () => {

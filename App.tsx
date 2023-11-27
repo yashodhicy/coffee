@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import auth from '@react-native-firebase/auth';
-import { SafeAreaView, StyleSheet, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import SignIn from './screens/SignIn';
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SignUp from "./screens/SignUp";
-import Voice from "./screens/Voice";
+import Coffee from "./screens/Coffee";
 
 const Stack = createNativeStackNavigator();
 
@@ -43,9 +43,22 @@ function App() {
 
 const InsideStack = createNativeStackNavigator();
 const InsideLayout = () => {
+
+  const HandleSignOut = async() => {
+    try {
+        await auth().signOut();
+      } catch (error) {
+        console.error("Error signing out:", error);
+      }
+  }
+
   return (
     <InsideStack.Navigator>
-      <InsideStack.Screen name="Voice" component={Voice} />    
+      <InsideStack.Screen name="Coffee" component={Coffee} options={{ 
+        headerRight: ()=>( 
+        <TouchableOpacity onPress={HandleSignOut}><Text>Sign Out</Text></TouchableOpacity>
+        ),
+      }}/>    
     </InsideStack.Navigator>
   );
 };

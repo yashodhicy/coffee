@@ -1,12 +1,15 @@
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import auth from '@react-native-firebase/auth'
+import { useNavigation } from '@react-navigation/native'
 
 
 const SignUp = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("") 
     const [name, setName] = useState("")
+
+    const navigation = useNavigation();
 
     const handleSignUp = async() => {
         if(!email || !password) {
@@ -23,7 +26,7 @@ const SignUp = () => {
     }
 
     const handleSignIn = () => {
-        // navigation.navigate('SignIn');
+      navigation.navigate('SignIn');
     }
 
   return (
