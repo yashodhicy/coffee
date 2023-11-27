@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, TextInput, TouchableOpacity, View , Text, Alert} from 'react-native'
 import auth from '@react-native-firebase/auth';
+import { useNavigation } from '@react-navigation/native';
 
-export default function SignIn() {
+
+const SignIn =() => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("") 
+  
+  const navigation = useNavigation();
   
   const handleSignIn = async () => {
     if(!email || !password) {
@@ -20,17 +24,7 @@ export default function SignIn() {
   }
   
   const handleSignUp = async() => {
-    if(!email || !password) {
-        Alert.alert("Please enter your email and password.");
-        return;
-    }
-
-    try {
-        await auth().createUserWithEmailAndPassword(email, password);
-        console.log("signing up");
-    } catch (err) {
-        Alert.alert("Signup failed", JSON.stringify(err));
-    }
+    navigation.navigate('SignUp')
   }
 
   return (
@@ -44,6 +38,8 @@ export default function SignIn() {
     </View>
   )
 }
+
+export default SignIn;
 
 const styles = StyleSheet.create({
     container: {
@@ -61,3 +57,4 @@ const styles = StyleSheet.create({
       borderRadius: 10,
     },
 });
+
