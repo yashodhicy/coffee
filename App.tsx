@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import auth from '@react-native-firebase/auth';
 import { SafeAreaView, StyleSheet, View } from "react-native";
 import SignIn from './screens/SignIn';
@@ -8,22 +8,29 @@ import SignUp from "./screens/SignUp";
 import Voice from "./screens/Voice";
 
 const Stack = createNativeStackNavigator();
-const InsideStack = createNativeStackNavigator(); 
 
 
-function App() : JSX.Element {
-  const User = auth().currentUser;
-  
+function App() {
 
-  
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = auth().onAuthStateChanged((user) => {
+      setUser(user);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={User ? 'Inside' : 'SignIn'}>
-        {User ? (
+      <Stack.Navigator initialRouteName={user ? 'Inside' : 'SignIn'}  screenOptions={{ headerShown: false }}>
+        { user ? (
           <Stack.Screen name="Inside" component={InsideLayout} />
         ):(
         <>
-          <Stack.Screen name="SignIn" component={SignIn} />
+          <Stack.Screen name="SignIn" component={SignIn}  />
           <Stack.Screen name="SignUp" component={SignUp} />
         </>
         
@@ -34,15 +41,15 @@ function App() : JSX.Element {
   )
 }
 
-const insideStack = createNativeStackNavigator();
-
+const InsideStack = createNativeStackNavigator();
 const InsideLayout = () => {
-  return(
+  return (
     <InsideStack.Navigator>
-      <InsideStack.Screen  name="voice" component={Voice}/>
+      <InsideStack.Screen name="Voice" component={Voice} />    
     </InsideStack.Navigator>
-  )
-}
+  );
+};
+
 
 export default App;
 

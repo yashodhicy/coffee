@@ -1,12 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, TextInput, TouchableOpacity, View , Text, Alert} from 'react-native'
 import auth from '@react-native-firebase/auth';
-import { NavigationContainer } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 
-const SignIn =({ navigation }) => {
+const SignIn =() => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("") 
+  const [user,setUser] = useState(null)
+  
+  // useEffect(()=>{
+  //      setUser(auth().currentUser)
+  // },[user]) 
+  const navigation = useNavigation();
   
   const handleSignIn = async () => {
     if(!email || !password) {

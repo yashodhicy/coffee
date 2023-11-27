@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import auth from '@react-native-firebase/auth'
 
 
-const SignUp = ({ navigation }) => {
+const SignUp = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("") 
     const [name, setName] = useState("")
@@ -23,7 +23,7 @@ const SignUp = ({ navigation }) => {
     }
 
     const handleSignIn = () => {
-        navigation.navigate('SignIn');
+        // navigation.navigate('SignIn');
     }
 
   return (
