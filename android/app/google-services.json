@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "874620563904",
+    "project_id": "voicetotext-4b971",
+    "storage_bucket": "voicetotext-4b971.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:874620563904:android:9689d8242719bedbb05825",
+        "android_client_info": {
+          "package_name": "com.coffee"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwvppt3TODXFY3YUwUXvIuvBRruZOM4Yo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
