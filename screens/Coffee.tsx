@@ -1,9 +1,16 @@
 import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
+interface CoffeeItem {
+  image: string,
+  title: string,
+  description: string,
+} 
 const Coffee = () => { 
-  const [coffeelist, setCoffeelist] = useState([]);
+  const [coffeelist, setCoffeelist] = useState<CoffeeItem[]>([]);
+  const navigation = useNavigation();
   
   useEffect(()=>{
       getCoffee();
@@ -12,7 +19,8 @@ const Coffee = () => {
   const getCoffee = async() => {
     try{
       const response = await fetch('https://api.sampleapis.com/coffee/hot');
-      const coffee = await response.json();
+      const coffee: CoffeeItem[] = await response.json();
+      console.log(coffee);
       setCoffeelist(coffee);
     }
     catch(err){
@@ -21,17 +29,21 @@ const Coffee = () => {
       
   }
 
+  const details = (coffee: CoffeeItem) => {
+      navigation.navigate('Details', { coffee });
+  }
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       {
       coffeelist.map((cof, index) => (
         <View key={index} style={styles.cofContainer}>
           <Image source={{ uri: cof?.image }}  style ={ styles.cofImage }/>
           <Text style= {styles.name}>{cof?.title}</Text>
+          <TouchableOpacity><Text style= {styles.details} onPress={() => details(cof)}>Details</Text></TouchableOpacity>
         </View>
       ))}
 
-    </View>
+    </ScrollView>
   )
 }
 
@@ -43,7 +55,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     paddingHorizontal:4,
-    backgroundColor: 'black'
+    backgroundColor: '#0c0f14'
     
   },
 
@@ -55,7 +67,7 @@ const styles = StyleSheet.create({
     padding:10,
     gap:4,
     borderRadius:10,
-    Color: 'white'
+    color: 'white'
  
   },
 
@@ -66,5 +78,13 @@ const styles = StyleSheet.create({
 
   name: {
     color: 'white'
-  }
+  },
+
+  details: {
+    backgroundColor:'brown',
+    padding:4,
+    borderRadius:5,
+    color:"white"
+  },
+
 })
