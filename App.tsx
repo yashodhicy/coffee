@@ -55,8 +55,14 @@ const InsideLayout = () => {
   return (
     <InsideStack.Navigator>
       <InsideStack.Screen name="Coffee" component={Coffee} options={{ 
+        headerTintColor: 'white',
+        statusBarColor: 'black',
+        headerStyle: {
+          backgroundColor: 'black',
+        },
+
         headerRight: ()=>( 
-        <TouchableOpacity onPress={HandleSignOut}><Text>Sign Out</Text></TouchableOpacity>
+        <TouchableOpacity onPress={HandleSignOut}><Text style={styles.signout}>Sign Out</Text></TouchableOpacity>
         ),
       }}/>    
     </InsideStack.Navigator>
@@ -72,4 +78,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
+  signout: {
+    color: 'white'
+  }
 })
