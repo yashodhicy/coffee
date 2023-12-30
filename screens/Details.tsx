@@ -11,11 +11,10 @@ const Details = () => {
       <View style={styles.imageContainer}>
         <Image source={{uri: coffeeDetails.image}} style={styles.cofImage} />
         <View style={styles.ingredients}>
-        <Text style={styles.title}>{coffeeDetails.title}</Text>
-        { coffeeDetails.ingredients.map( ingre => (
-          <Text style={styles.ingredient}> { ingre } </Text>
-        ))
-        }
+          <Text style={styles.title}>{coffeeDetails.title}</Text>
+          {coffeeDetails.ingredients.map(ingre => (
+            <Text style={styles.ingredient}> {ingre} </Text>
+          ))}
         </View>
       </View>
       <View>
@@ -55,18 +54,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   ingredients: {
-    position:'absolute',
+    position: 'absolute',
     bottom: 0,
-    width:'100%',
+    width: '100%',
     padding: 10,
     backgroundColor: '#141921',
-    opacity:0.6,
+    opacity: 0.6,
     zIndex: 2,
     borderRadius: 20,
-    flexDirection:'row'
-
+    flexDirection: 'row',
   },
   ingredient: {
-    color:'white'
-  }
+    color: 'white',
+  },
 });
